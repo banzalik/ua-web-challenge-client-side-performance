@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Производительность Client-Side</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="node_modules/shower-ribbon/styles/screen.css">
+</head>
+<body class="list">
+<header class="caption">
+	<h1>Производительность Client-Side</h1>
+
+	<p>Александр Бойченко, @banzalik</p>
+</header>
+<section class="slide cover" id="Cover">
+	<div>
+		<h2>Производительность Client-Side</h2>
+
+		<p>Александр Бойченко, <a href="http://banzalik.ru">@banzalik</a></p>
+		<!--
+			To apply styles to the certain slides
+			set slide ID to get needed elements
+			-->
+		<style>
+			.slide.cover {
+				background: #fff;
+			}
+
+			.slide:after {
+				background: none;
+				color: #666;
+				top: auto;
+				bottom: 0;
+				right: 20px;
+				height: 60px;
+			}
+
+			.slide.cover > div {
+				padding-top: 200px;
+			}
+
+			#Cover h2 {
+				margin: 30px 0 0;
+				color: #666;
+				text-align: center;
+				font-size: 65px;
+			}
+
+			#Cover p {
+				margin: 10px 0 0;
+				text-align: center;
+				color: #666;
+				font-style: italic;
+				font-size: 30px;
+			}
+
+			#Cover p a {
+				color: #666;
+				text-decoration: none;
+				background: none;
+			}
+		</style>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>О чем сегодня поговорим?</h2>
+		<ul>
+			<li class="next">О HTML и CSS</li>
+			<li class="next">Как ускорить ваш сайт</li>
+			<li class="next">Как создавать быстрые сайты</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>А что по поводу JavaScript?</h2>
+		<ul>
+			<li class="next">Материала достаточно</li>
+			<li class="next">Любая Front-End конференция - доклад об ускорении JS</li>
+			<li class="next">Хочу заострить внимание на других проблемах</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Когда пора думать про скорость?</h2>
+		<ul>
+			<li class="next">Когда Hi-Load</li>
+			<li class="next">Когда сайт приносит деньги</li>
+			<li class="next">Стоит задача подняться в поисковой выдаче</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Почему именно Business?</h2>
+		<ul>
+			<li class="next">100 ms задержка = на 1% падение продаж (Amazon)</li>
+			<li class="next">400 ms задежка = 5-9% уменьшение трафика (Yahoo!)</li>
+			<li class="next">500 ms задержка = 20% уменьшение трафика (Google)</li>
+		</ul>
+	</div>
+</section>
+
+<!--<section class="slide">-->
+	<!--<div>-->
+		<!--<h2>Заблуждение</h2>-->
+		<!--<ul>-->
+			<!--<li class="next">Какой сайт быстрее?</li>-->
+			<!--<li class="next">Который загружается за минимальное время.</li>-->
+			<!--<li class="next">Который первым отобразил контент!</li>-->
+		<!--</ul>-->
+	<!--</div>-->
+<!--</section>-->
+
+<section class="slide">
+	<div>
+		<h2>Чем мерять скорость загрузки?</h2>
+		<ul>
+			<li class="next">Dev Tools, вкладки ресурсы, сеть.</li>
+			<li class="next">Google page speed</li>
+			<li class="next">YSlow</li>
+			<li class="next">http://www.webpagetest.org</li>
+			<li class="next">JavaScript</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/dev-net.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/dev-timeline.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/dev-prof.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/dev-audit.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/yui.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/page-speed.png" alt="">
+	</div>
+</section>
+
+<section class="slide cover">
+	<div>
+		<img src="pictures/webpagespeed.png" alt="">
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>JavaScript</h2>
+		<ul>
+			<li class="next">Navigation Timing API
+			</li>
+			<li class="next">chrome.loadTimes()
+				<ul>
+					<li class="next">chrome.loadTimes().firstPaintTime</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Что влияет на скорость загрузки?</h2>
+		<ul>
+			<li class="next">Сервер (Back-End)</li>
+			<li class="next">Сеть (Internet)</li>
+			<li class="next">Клиентский код (Front-End)</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Сервер</h2>
+		<ul>
+			<li class="next">Настройка кеширования</li>
+			<li class="next">Настройка сжатия</li>
+			<li class="next">Уменьшение количества перенаправлений</li>
+			<li class="next">Использование CDN</li>
+			<li class="next">Уменьшать размер cookie</li>
+			<li class="next">Уменьшение времени ответа сервера</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Настройка кеширования</h2>
+		<ul>
+			<li class="next">HTML</li>
+			<li class="next">CSS</li>
+			<li class="next">Медиа/Картинки</li>
+			<li class="next">JavaScript</li>
+			<li class="next">Файлы храним в виде MD5(file.ext).ext или
+				SHA256(file.ext).ext<br>Например: <b>608333adc72f545078ede3aad71bfe74.css</b></li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Настройка кеширования</h2>
+		<ul>
+			<li class="next">Настроить ETags</li>
+			<li class="next">Настроить Expires</li>
+			<li class="next">или Cache-Control Header</li>
+			<li class="next">По возможности кешировать Ajax</li>
+			<li class="next">По возможности для Ajax использовать GET
+				запросы</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Настройка сжатия</h2>
+		<ul>
+			<li class="next">Gzip</li>
+			<li class="next">Уровень сжатия 6-8</li>
+			<li class="next">Сжимать можно как на лету, так и создавать .gzip файлы</li>
+			<li class="next">Создавать .gzip файлы предпочтительней</li>
+			<li class="next">Сжимаем все, кроме медиа и картинок</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Использвание CDN</h2>
+		<ul>
+			<li class="next">Не использовать для ресурсов внутри &lt;head&gt;...&lt;/head&gt;</li>
+			<li class="next">Не более 4х доменов</li>
+			<li class="next">Контролировать, чтобы конкретный ресурс всегда грузился с одного домена</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Уменьшение времени ответа сервера</h2>
+		<ul>
+			<li class="next">Пинать программистов и админов</li>
+			<li class="next">Использовать проксирующие сервера вроде Ngnix</li>
+			<li class="next">Если если время ответа нельзя ускорить малой
+				кровью - использовать хак с предзагрузкой</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Классическая работа с сервером</h2>
+		<ul>
+			<li class="next">Запрос от клиента (браузера)</li>
+			<li class="next">Сервер "думает"</li>
+			<li class="next">Сервер отдает код HTML страницы</li>
+			<li class="next">Браузер загружает остальные данные</li>
+			<li class="next">Страница загружена</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Проблема такого подхода</h2>
+		<ul>
+			<li class="next">Браузер ничего не делает пока сервер занят</li>
+			<li class="next">А что если сразу отдавать часть страницы?</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>А что если сразу отдать часть страницы?</h2>
+		<ul>
+			<li class="next">Запрос от клиента (браузера)</li>
+			<li class="next">Сервер сразу отдает часть страницы</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Отдаваемая часть страны</h2>
+		<pre>
+			<code>&lt;!DOCTYPE html&gt;</code>
+			<code>&lt;html&gt;</code>
+			<code>&lt;head&gt;</code>
+			<code>    <mark>&lt;link rel="stylesheet" href="style.css"/&gt;</mark></code>
+			<code>    <mark>&lt;script src="script.js"&gt;&lt;/script&gt;</mark></code>
+			<code>    <mark class="important">&lt;title&gt;</mark></code>
+		</pre>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>А что если сразу отдать часть страницы?</h2>
+		<ul>
+			<li>Запрос от клиента (браузера)</li>
+			<li>Сервер сразу отдает часть страницы</li>
+			<li>Пока сервер "думает" браузер загружает css | js | img</li>
+			<li class="next">Сервер отдает оставшийся контент</li>
+			<li class="next">Страница быстрее отрисовывается из-за предзагруженой статики</li>
+			<li class="next">Profit</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Плюсы подхода</h2>
+		<ul>
+			<li class="next">Браузер не простаивает, а занят полезном делом</li>
+			<li class="next">Чем медленней сервер отвечает - тем больше успеем загрузить</li>
+			<li class="next">Существенное ускорение без серьезных затрат на оптимизацию</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация сети</h2>
+		<ul>
+			<li class="next">Использование CDN</li>
+			<li class="next">Скорость не так важна, как пинг</li>
+			<li class="next">Старайтесь размещать сервера ближе к клиентам</li>
+			<li class="next">Минимизируйте количество сетевых запросов</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация клиентского кода</h2>
+		<ul>
+			<li class="next">HTML</li>
+			<li class="next">CSS</li>
+			<li class="next">Графика</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация HTML</h2>
+		<ul>
+			<li class="next">CSS и JS - должны подключаться как внешние
+				файлы</li>
+			<li class="next">CSS внутри &lt;head&gt;</li>
+			<li class="next">JS перед закрытием тега &lt;/body&gt;</li>
+			<li class="next">Страница должна уметь работать c отключенным
+				JS</li>
+			<li class="next">Минимизируем количество &lt;iframe&gt;</li>
+			<li class="next">Следите за доступностью ресурсов,
+				404 не допустимо</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация HTML</h2>
+		<ul>
+			<li>Не используйте &lt;img src="" /&gt; с пустым
+				атрибутом src</li>
+			<li class="next">Минимизируйте количество CSS файлов до одного</li>
+			<li class="next">Минимизируйте количество JS файлов до одного</li>
+			<li class="next">Минимизируйте HTML</li>
+			<li class="next">Внешний код (FB like, Google analytics и др.) дожен быть асинхронным</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация HTML</h2>
+		<ul>
+			<li class="next">Избегайте большой вложенности тегов</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация CSS</h2>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Как работает CSS парсер?</h2>
+		<pre><code>#header ul li a { color: red }</code></pre>
+		<ul>
+			<li class="next">Справа на лево</li>
+			<li class="next">Находим все li, сожержащие ссылки</li>
+			<li class="next">Находим все ul, сожержащие li c ссылками</li>
+			<li class="next">Находим элементы с заданным ID, содержащим ul li a</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Каскад - это дорого</h2>
+		<ul>
+			<li class="next">Старайтесь минимизировать каскад</li>
+			<li class="next">Используйте BEM или его аналог</li>
+			<li class="next">Не используйте селектор * (звездочка)</li>
+			<li class="next">Селекторы только по классам
+				<ul>
+					<li class="next">Никаких ID</li>
+					<li class="next">Никаких tagName</li>
+					<li class="next">Никаких [attr="something"]</li>
+					<li class="next">Селектор по .className очень быстрый
+						почти как по #id</li>
+				</ul></li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Методы оптимизации CSS</h2>
+		<ul>
+			<li class="next">Не используйте reset.css, normalizer.css или их
+				аналоги</li>
+			<li class="next">Не используйте теги, чьи стили требуется
+				сбрасывать (ul, p, i and etc)</li>
+			<li class="next">Не используйте @import</li>
+			<li class="next">Не используйте IEшные фильтры или кешируйте
+				их</li>
+			<li class="next">Некоторые фичи CSS3 медленные</li>
+			<li class="next">Спрайты и data:uri</li>
+			<li class="next">Вендроные префиксы, браузерные хаки (определять
+				браузер на клиенте и отдавать ему нужный CSS)</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Методы оптимизации CSS</h2>
+		<ul>
+			<li class="next">Избегайте глобальных классов на
+				&lt;body&gt; и их переключения</li>
+			<li class="next">Минимизируйте длинну имен классов</li>
+			<li class="next">Острожно относиться к кастомным шрифтам</li>
+			<li class="next">Пользуйтесь минификаторами CSS, например CSSO</li>
+			<li class="next">Autoprefixer поможет с вендорными префиксами
+				и с генерацией стилей для отдельных браузеров</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Спрайты или data:uri?</h2>
+		<ul>
+			<li class="next">Если не мобильные - то предпочтительней
+				data:uri</li>
+			<li class="next">CSS файл с data:uri может быть отдельным,
+				не обязательно data:uri пихать в основной CSS файл</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация картинок</h2>
+		<ul>
+			<li class="next">Чаще всего требуется только 3 формата графики:
+				PNG, JPG и SVG</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>PNG</h2>
+		<ul>
+			<li class="next">Иконки</li>
+			<li class="next">Полупрозрачность</li>
+			<li class="next">Мало цветов</li>
+			<li class="next">Картинки с текстом</li>
+			<li class="next">Градиенты</li>
+			<li class="next">Служебная графика</li>
+			<li class="next">Недопустима потеря качества</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>JPG</h2>
+		<ul>
+			<li class="next">Фотографии</li>
+			<li class="next">Изображения большого размера</li>
+			<li class="next">Допустима потеря качества</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>SVG</h2>
+		<ul>
+			<li class="next">Векторная графика</li>
+			<li class="next">Иконки</li>
+			<li class="next">Есть возможность взаимодействовать с CSS</li>
+			<li class="next">Нет проблем с масштабируемостью</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Сжатие графики</h2>
+		<ul>
+			<li class="next">Photoshop</li>
+			<li class="next">Svgo - для svg</li>
+			<li class="next">JpegMini - для jpg</li>
+			<li class="next">ScriptPNG или imgo - для png и jpg</li>
+			<li class="next">punypng.com, kraken.io, jpegmini.com, smush.it</li>
+			<li class="next">Есть еще десятки инструментов на любой вкус</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Favicon.ico</h2>
+		<ul>
+			<li>Всегда должен лежать в корне проекта</li>
+			<li class="next">Некоторые браузеры запрашивают
+				http://site.com/favicon.ico
+				даже если он не обьявлен в HTML</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>И еще немного про графику</h2>
+		<ul>
+			<li class="next">Всегда вставляйте картинки на страницу в их реальном
+				размере</li>
+			<li class="next">Background-size - может тормозить</li>
+			<li class="next">Не делайте спрайты очень большими (не более 60
+				Kb)</li>
+			<li class="next">Не забывайте оптимизировать спрайты</li>
+		</ul>
+	</div>
+</section>
+
+<section class="slide">
+	<div>
+		<h2>Оптимизация под мобильные</h2>
+		<ul>
+			<li class="next">Медленный интернет и устройство</li>
+			<li class="next">Избегать :hover эффектов</li>
+			<li class="next">Есть ограничения на размер файлов (25 Kb)</li>
+			<li class="next">Responsive верстка хуже, чем отдельная версия</li>
+			<li class="next">Часто требуется графика более высокого
+				качества</li>
+		</ul>
+	</div>
+</section>
+<section class="slide cover" id="CoverEnd">
+	<div>
+		<h2>Спасибо!</h2>
+
+		<p>Александр Бойченко, <a href="http://banzalik.ru">@banzalik</a></p>
+		<style>
+			#CoverEnd h2 {
+				margin: 30px 0 0;
+				color: #666;
+				text-align: center;
+				font-size: 65px;
+			}
+
+			#CoverEnd p {
+				margin: 10px 0 0;
+				text-align: center;
+				color: #666;
+				font-style: italic;
+				font-size: 30px;
+			}
+
+			#CoverEnd p a {
+				color: #666;
+				text-decoration: none;
+				background: none;
+			}
+		</style>
+	</div>
+</section>
+
+<p class="badge"><a href="https://github.com/shower/shower">Fork me on Github</a></p>
+<!--
+	To hide progress bar from entire presentation
+	just remove “progress” element.
+	-->
+<div class="progress">
+	<div></div>
+</div>
+<script src="node_modules/shower-core/shower.min.js"></script>
+</body>
+</html>
