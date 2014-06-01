@@ -105,22 +105,7 @@
 			<li class="next">Google page speed</li>
 			<li class="next">YSlow</li>
 			<li class="next">http://www.webpagetest.org</li>
-			<li class="next">JavaScript</li>
-		</ul>
-	</div>
-</section>
-
-<section class="slide">
-	<div>
-		<h2>JavaScript</h2>
-		<ul>
-			<li class="next">Navigation Timing API
-			</li>
-			<li class="next">chrome.loadTimes()
-				<ul>
-					<li class="next">chrome.loadTimes().firstPaintTime</li>
-				</ul>
-			</li>
+			<li class="next">JavaScript (Navigation Timing API, сторонние утилиты)</li>
 		</ul>
 	</div>
 </section>
@@ -169,8 +154,7 @@
 		<h2>Настройка кеширования</h2>
 		<ul>
 			<li class="next">Настроить ETags</li>
-			<li class="next">Настроить Expires</li>
-			<li class="next">или Cache-Control Header</li>
+			<li class="next">Настроить Expires или Cache-Control Header</li>
 			<li class="next">По возможности кешировать Ajax</li>
 			<li class="next">По возможности для Ajax использовать GET запросы</li>
 		</ul>
@@ -206,7 +190,8 @@
 		<h2>Уменьшение времени ответа сервера</h2>
 		<ul>
 			<li class="next">Пинать программистов и админов</li>
-			<li class="next">Использовать проксирующие сервера вроде Ngnix</li>
+			<li class="next">Использовать проксирующие сервера такие как Ngnix</li>
+			<li class="next">Page-Speed модули для веб серверов от Google</li>
 			<li class="next">Если если время ответа нельзя ускорить малой
 				кровью - использовать хак с предзагрузкой</li>
 		</ul>
@@ -217,7 +202,7 @@
 	<div>
 		<h2>Классическая работа с сервером</h2>
 		<ul>
-			<li class="next">Запрос от клиента (браузера)</li>
+			<li>Запрос от клиента (браузера)</li>
 			<li class="next">Сервер "думает"</li>
 			<li class="next">Сервер отдает код HTML страницы</li>
 			<li class="next">Браузер загружает остальные данные</li>
@@ -240,7 +225,7 @@
 	<div>
 		<h2>А что если сразу отдать часть страницы?</h2>
 		<ul>
-			<li class="next">Запрос от клиента (браузера)</li>
+			<li>Запрос от клиента (браузера)</li>
 			<li class="next">Сервер сразу отдает часть страницы</li>
 		</ul>
 	</div>
@@ -270,17 +255,6 @@
 			<li class="next">Сервер отдает оставшийся контент</li>
 			<li class="next">Страница быстрее отрисовывается из-за предзагруженой статики</li>
 			<li class="next">Profit</li>
-		</ul>
-	</div>
-</section>
-
-<section class="slide">
-	<div>
-		<h2>Плюсы подхода</h2>
-		<ul>
-			<li class="next">Браузер не простаивает, а занят полезном делом</li>
-			<li class="next">Чем медленней сервер отвечает - тем больше успеем загрузить</li>
-			<li class="next">Существенное ускорение без серьезных затрат на оптимизацию</li>
 		</ul>
 	</div>
 </section>
@@ -335,15 +309,7 @@
 			<li class="next">Минимизируйте количество JS файлов до одного</li>
 			<li class="next">Минимизируйте HTML</li>
 			<li class="next">Внешний код (FB like, Google analytics и др.) дожен быть асинхронным</li>
-		</ul>
-	</div>
-</section>
-
-<section class="slide">
-	<div>
-		<h2>Оптимизация HTML</h2>
-		<ul>
-			<li class="next">Избегайте большой вложенности тегов</li>
+				<li class="next">Избегайте большой вложенности тегов</li>
 		</ul>
 	</div>
 </section>
@@ -360,6 +326,7 @@
 		<pre><code>#header ul li a { color: red }</code></pre>
 		<ul>
 			<li class="next">Справа на лево</li>
+			<li class="next">Находим все ссылки на странице</li>
 			<li class="next">Находим все li, сожержащие ссылки</li>
 			<li class="next">Находим все ul, сожержащие li c ссылками</li>
 			<li class="next">Находим элементы с заданным ID, содержащим ul li a</li>
@@ -372,7 +339,7 @@
 		<h2>Каскад - это дорого</h2>
 		<ul>
 			<li class="next">Старайтесь минимизировать каскад</li>
-			<li class="next">Используйте BEM или его аналог</li>
+			<li class="next">Используйте BEM или его аналоги</li>
 			<li class="next">Не используйте селектор * (звездочка)</li>
 			<li class="next">Селекторы только по классам
 				<ul>
@@ -498,9 +465,9 @@
 	<div>
 		<h2>Favicon.ico</h2>
 		<ul>
-			<li>Всегда должен лежать в корне проекта</li>
+			<li class="next">Всегда должен лежать в корне проекта http://site.name/favicon.ico</li>
 			<li class="next">Некоторые браузеры запрашивают
-				http://site.com/favicon.ico
+				http://site.name/favicon.ico
 				даже если он не обьявлен в HTML</li>
 		</ul>
 	</div>
@@ -516,20 +483,6 @@
 			<li class="next">Не делайте спрайты очень большими (не более 60
 				Kb)</li>
 			<li class="next">Не забывайте оптимизировать спрайты</li>
-		</ul>
-	</div>
-</section>
-
-<section class="slide">
-	<div>
-		<h2>Оптимизация под мобильные</h2>
-		<ul>
-			<li class="next">Медленный интернет и устройство</li>
-			<li class="next">Избегать :hover эффектов</li>
-			<li class="next">Есть ограничения на размер файлов (25 Kb)</li>
-			<li class="next">Responsive верстка хуже, чем отдельная версия</li>
-			<li class="next">Часто требуется графика более высокого
-				качества</li>
 		</ul>
 	</div>
 </section>
